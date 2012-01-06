@@ -1,0 +1,12 @@
+[submodule "deps/create"]
+	path = deps/create
+	url = git://github.com/bergie/create.git
+[submodule "deps/to-markdown"]
+	path = deps/to-markdown
+	url = git://github.com/domchristie/to-markdown.git
+[submodule "deps/markdown-js"]
+	path = deps/markdown-js
+	url = git://github.com/evilstreak/markdown-js.git
+[submodule "deps/filer"]
+	path = deps/filer
+	url = git://github.com/ebidel/filer.js.git
