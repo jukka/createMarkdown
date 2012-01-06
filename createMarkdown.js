@@ -1,7 +1,18 @@
 var vie = new VIE();
 
+var entries = {};
+
 Backbone.sync = function(method, model, options) {
-  console.log(method, model);
+  if (method === 'update') {
+    var fileEntry = entries[model.getSubjectUri()];
+    filer.write(fileEntry, toMarkdown(model.get('content')), function(fileEntry, fileWriter) {
+      console.log(toMarkdown(model.get('content')));
+      options.success(model);
+    }, function(error) {
+      console.log(error);
+      options.error(model);
+    });
+  }
 };
 
 var filer = new Filer();
@@ -24,31 +35,45 @@ jQuery(document).ready(function() {
   });
 });
 
-var addFileToVIE = function(file) {
+var addFileToVIE = function(file, fileEntry) {
   var fs = vie.entities.get('filesystem');
-  console.log(file);
+
+  entries[file.webkitRelativePath] = fileEntry
 
   var reader = new FileReader();
   reader.onload = function(event) {
     fs.get('file').add({
-      '@subject': file.fileName,
+      '@subject': file.webkitRelativePath,
       'filename': file.fileName,
-      'content': markdown.toHTML(event.target.result)
+      'content': markdown.toHTML(event.target.result),
     });
   };
   reader.readAsText(file);
 };
 
-var importFile = function(file) {
-  var parts = file.fileName.split('.');
+var isMarkdown = function(fileName) {
+  var parts = fileName.split('.');
   switch (parts[parts.length - 1]) {
     case 'md':
     case 'markdown':
-      addFileToVIE(file);
+      return true;
       break;
-    default:
-      return;
   }
+  return false;
+};
+
+var importFile = function(file) {
+  if (!isMarkdown(file.fileName)) {
+    return;
+  }
+  filer.write(file.fileName, {
+      data: file, 
+      type: file.type
+    },
+    function(fileEntry, fileWriter) {
+      addFileToVIE(file, fileEntry);
+    }
+  );
 };
 
 var importFiles = function(event) {
