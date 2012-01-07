@@ -1,0 +1,11 @@
+{
+  "name": "create-markdown",
+  "version": "0.0.1",
+  "url": "http://createjs.org/",
+  "description": "Markdown editing support for Create",
+  "keywords": [ "markdown", "create" ],
+  "dependencies": {
+    "express": ">=2.5.0",
+    "coffee-script": ">=1.2.0"
+  }
+}
