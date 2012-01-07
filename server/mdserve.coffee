@@ -1,9 +1,9 @@
 express = require('express')
-fs = require('fs');
+fs = require('fs')
 
 [ node, server, base, port ] = process.argv
-port ?= 3000;
-base = fs.realpathSync(base || '.');
+port ?= 3000
+base = fs.realpathSync(base || '.')
 
 postHtml = (req, res) ->
   file = base + req.url.replace(/\.html$/, '.md')
@@ -17,9 +17,9 @@ postMarkdown = (req, res) ->
 
 server = express.createServer()
 server.use(express.bodyParser())
-server.post(/\.html$/, postHtml);
-server.post(/\.(md|mdtext|markdown)$/, postMarkdown);
+server.post(/\.html$/, postHtml)
+server.post(/\.(md|mdtext|markdown)$/, postMarkdown)
 server.use(express.static(base))
-server.use(express.errorHandler({ dumpExceptions: true }));
-server.listen(port);
+server.use(express.errorHandler({ dumpExceptions: true }))
+server.listen(port)
 
