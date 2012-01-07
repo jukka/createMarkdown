@@ -1,0 +1,38 @@
+!!! 5
+html
+  head
+    title CreateJS markdown editor
+    script(src='../deps/filer/src/filer.js')
+    script(src='../deps/to-markdown/src/to-markdown.js')
+    script(src='../deps/markdown-js/lib/markdown.js')
+    script(src='../deps/create/deps/jquery-1.6.4.min.js')
+    script(src='../deps/create/deps/jquery-ui-1.8.16.custom.min.js')
+    script(src='../deps/create/deps/modernizr.custom.80485.js')
+    script(src='../deps/create/deps/underscore-min.js')
+    script(src='../deps/create/deps/backbone-min.js')
+    script(src='../deps/create/deps/vie-min.js')
+    script(src='../deps/create/deps/hallo/hallo.js')
+    script(src='../deps/create/deps/hallo/format.js')
+    script(src='../deps/create/src/jquery.Midgard.midgardCreate.js')
+    script(src='../deps/create/src/jquery.Midgard.midgardToolbar.js')
+    script(src='../deps/create/src/jquery.Midgard.midgardStorage.js')
+    script(src='../deps/create/src/jquery.Midgard.midgardEditable.js')
+    script(src='../deps/create/src/jquery.Midgard.midgardWorkflows.js')
+    script(src='../createMarkdown.js')
+    | <link rel="stylesheet" href="../deps/create/deps/hallo/vader/jquery-ui-1.8.16.custom.css" />
+    | <link rel="stylesheet" href="../deps/create/themes/midgard-theme/jquery.ui.all.css" />
+    | <link rel="stylesheet" href="../deps/create/themes/midgard-toolbar/midgardbar.css" />
+    | <link rel="stylesheet" href="../markdown.css" />
+  body
+    #starter
+      | <input type="file" class="btn" webkitdirectory="" alt="Import directory into the current folder" title="Import directory into the current folder" />
+    | <div class="filelist" about="filesystem">
+    |   <ol rel="file">
+    |     <li about="mgd:placeholder">
+    |       <h1 property="filename">Filename</h1>
+    |       <div property="content">
+    |         Content
+    |       </div>
+    |     </li>
+    |   </ol>
+

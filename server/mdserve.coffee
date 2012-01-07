@@ -17,6 +17,7 @@ postMarkdown = (req, res) ->
 
 server = express.createServer()
 server.use(express.bodyParser())
+server.get('/', (req, res) -> res.render('template.jade', { layout: false }))
 server.post(/\.html$/, postHtml)
 server.post(/\.(md|mdtext|markdown)$/, postMarkdown)
 server.use(express.static(base))
