@@ -5,19 +5,23 @@ mdre = /\.(md|mdtext|markdown)$/;
 
 [ node, server, base, port ] = process.argv
 port ?= 3000
-base  = fs.realpathSync(base || __dirname)
+root  = fs.realpathSync(root || __dirname)
 
 server = express.createServer()
 server.use express.bodyParser()
 
+server.use '/-', express.static(__dirname)
+
 server.get mdre, (req, res, next) ->
   if /html/.test(req.headers.accept)
-    res.sendfile
+    express.static.send req, res, next,
+      root: __dirname,
+      path: 'editor.html'
   else
     next()
 
-server.use express.directory(base)
-server.use express.static(base)
+server.use express.static(root)
+server.use express.directory(root)
 server.use express.errorHandler({ stack: true })
 
 server.listen port
